@@ -69,7 +69,7 @@ func GetBootableDisks(disks []*os.File) (bootable_disks []*os.File) {
 			continue
 		}
 
-		if data[0] & 0b10000000 == 0b10000000 {
+		if data[0]&0b10000000 != 0 {
 			bootable_disks = append(bootable_disks, disk)
 		}
 	}
