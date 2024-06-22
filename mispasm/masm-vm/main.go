@@ -11,10 +11,9 @@ func main() {
 	data := read_exec(os.Args[1])
 	global, funcs := get_functions(data)
 	init_instructions(&funcs)
+	init_calls()
 
 	run_function(funcs[global])
-
-	fmt.Printf("Result: %d\n", registers["rsi0"])
 }
 
 func read_exec(loc string) (data []byte) {

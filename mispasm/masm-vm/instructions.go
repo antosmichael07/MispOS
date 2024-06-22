@@ -3,12 +3,15 @@ package main
 const (
 	ADD = iota + 1
 	SUB
-	CAL
+	FCAL
 	MUL
 	DIV
+	CALL
+	PUSH
+	POP
 )
 
-var arg_sizes = []byte{0, 2, 2, 1, 2, 2}
+var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1}
 
 var instructions = make(map[byte]func([]byte, []byte))
 
@@ -73,7 +76,7 @@ func init_instructions(funcs *map[string][]byte) {
 			}
 		}
 	}
-	instructions[CAL] = func(arg1 []byte, arg2 []byte) {
+	instructions[FCAL] = func(arg1 []byte, arg2 []byte) {
 		if arg1[0] != 12 {
 			panic("Invalid argument type for CAL\n")
 		} else {
@@ -139,5 +142,20 @@ func init_instructions(funcs *map[string][]byte) {
 				registers["rllf0"] = BytesToFloat64(arg1[1:]) / BytesToFloat64(arg2[1:])
 			}
 		}
+	}
+	instructions[CALL] = func(arg1 []byte, arg2 []byte) {
+		if arg1[0] != 1 {
+			panic("Invalid argument type for CALL\n")
+		} else {
+			calls[int(arg1[1])]([]byte{}, []byte{})
+		}
+	}
+	instructions[PUSH] = func(arg1 []byte, arg2 []byte) {
+		val := BytesToString(arg1[1 : len(arg1)-1])
+		stack_push(val, registers[val])
+	}
+	instructions[POP] = func(arg1 []byte, arg2 []byte) {
+		val := BytesToString(arg1[1 : len(arg1)-1])
+		stack_pop(val)
 	}
 }
