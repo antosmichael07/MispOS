@@ -9,9 +9,10 @@ const (
 	CALL
 	PUSH
 	POP
+	MOV
 )
 
-var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1}
+var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1, 2}
 
 var instructions = make(map[byte]func([]byte, []byte))
 
@@ -157,5 +158,12 @@ func init_instructions(funcs *map[string][]byte) {
 	instructions[POP] = func(arg1 []byte, arg2 []byte) {
 		val := BytesToString(arg1[1 : len(arg1)-1])
 		stack_pop(val)
+	}
+	instructions[MOV] = func(arg1 []byte, arg2 []byte) {
+		if arg1[0] != 12 || arg2[0] < byte(INT8) || arg2[0] > byte(FLOAT64) {
+			panic("Invalid arguments for MOV\n")
+		} else {
+			registers[string(arg1[1:len(arg1)-1])] = convert_to_value(arg2)
+		}
 	}
 }
