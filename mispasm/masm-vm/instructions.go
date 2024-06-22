@@ -78,7 +78,7 @@ func init_instructions(funcs *map[string][]byte) {
 		}
 	}
 	instructions[FCAL] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != 12 {
+		if arg1[0] != byte(STRING) {
 			panic("Invalid argument type for CAL\n")
 		} else {
 			run_function((*funcs)[string(arg1[1:len(arg1)-1])])
@@ -160,7 +160,7 @@ func init_instructions(funcs *map[string][]byte) {
 		stack_pop(val)
 	}
 	instructions[MOV] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != 12 || arg2[0] < byte(INT8) || arg2[0] > byte(CHAR) {
+		if arg1[0] != byte(STRING) {
 			panic("Invalid arguments for MOV\n")
 		} else {
 			registers[string(arg1[1:len(arg1)-1])] = convert_to_value(arg2)
