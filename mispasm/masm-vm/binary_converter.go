@@ -13,6 +13,7 @@ const (
 	UINT64
 	FLOAT32
 	FLOAT64
+	CHAR
 	BOOL
 	STRING
 )
@@ -41,6 +42,8 @@ func convert_to_value(data []byte) any {
 		return BytesToFloat32(data[1:])
 	case byte(FLOAT64):
 		return BytesToFloat64(data[1:])
+	case byte(CHAR):
+		return ByteToChar(data[1])
 	case byte(BOOL):
 		return ByteToBool(data[1])
 	case byte(STRING):
@@ -72,6 +75,8 @@ func convert_to_bytes(t Type, data any) []byte {
 		bytes = Float32ToBytes(data.(float32))
 	case FLOAT64:
 		bytes = Float64ToBytes(data.(float64))
+	case CHAR:
+		bytes = []byte{CharToByte(data.(string))}
 	case BOOL:
 		bytes = []byte{BoolToByte(data.(bool))}
 	case STRING:
@@ -158,6 +163,14 @@ func Float64ToBytes(f float64) []byte {
 
 func BytesToFloat64(b []byte) float64 {
 	return float64(BytesToInt64(b))
+}
+
+func CharToByte(c string) byte {
+	return byte(c[0])
+}
+
+func ByteToChar(b byte) string {
+	return string(b)
 }
 
 func BoolToByte(b bool) byte {
