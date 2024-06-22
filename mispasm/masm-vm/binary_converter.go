@@ -3,7 +3,7 @@ package main
 type Type int
 
 const (
-	INT8 Type = iota
+	INT8 Type = iota + 1
 	INT16
 	INT32
 	INT64
@@ -13,9 +13,11 @@ const (
 	UINT64
 	FLOAT32
 	FLOAT64
-	STRING
 	BOOL
+	STRING
 )
+
+var type_sizes = []int{-1, 1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, -1}
 
 func convert_to_value(data []byte) any {
 	switch data[0] {
@@ -39,10 +41,10 @@ func convert_to_value(data []byte) any {
 		return BytesToFloat32(data[1:])
 	case byte(FLOAT64):
 		return BytesToFloat64(data[1:])
-	case byte(STRING):
-		return BytesToString(data[1:])
 	case byte(BOOL):
 		return ByteToBool(data[1])
+	case byte(STRING):
+		return BytesToString(data[1:])
 	}
 	return nil
 }
@@ -70,10 +72,10 @@ func convert_to_bytes(t Type, data any) []byte {
 		bytes = Float32ToBytes(data.(float32))
 	case FLOAT64:
 		bytes = Float64ToBytes(data.(float64))
-	case STRING:
-		bytes = StringToBytes(data.(string))
 	case BOOL:
 		bytes = []byte{BoolToByte(data.(bool))}
+	case STRING:
+		bytes = StringToBytes(data.(string))
 	}
 	return append([]byte{byte(t)}, bytes...)
 }
@@ -158,14 +160,6 @@ func BytesToFloat64(b []byte) float64 {
 	return float64(BytesToInt64(b))
 }
 
-func StringToBytes(s string) []byte {
-	return []byte(s)
-}
-
-func BytesToString(b []byte) string {
-	return string(b)
-}
-
 func BoolToByte(b bool) byte {
 	if b {
 		return 1
@@ -175,4 +169,12 @@ func BoolToByte(b bool) byte {
 
 func ByteToBool(b byte) bool {
 	return b == 1
+}
+
+func StringToBytes(s string) []byte {
+	return []byte(s)
+}
+
+func BytesToString(b []byte) string {
+	return string(b)
 }

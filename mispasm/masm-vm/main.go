@@ -9,9 +9,8 @@ var registers = make(map[string]byte)
 
 func main() {
 	data := read_exec(os.Args[1])
-	init_instructions()
-
 	global, funcs := get_functions(data)
+	init_instructions(&funcs)
 
 	run_function(funcs[global])
 
