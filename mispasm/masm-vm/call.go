@@ -15,7 +15,15 @@ func init_calls() {
 }
 
 func print_stack() {
+	msg := ""
+	continu := false
 	for _, v := range stack {
-		fmt.Printf("%v\n", v)
+		if !continu {
+			msg = v.(string)
+			continu = true
+			continue
+		}
+		msg = fmt.Sprintf(msg, v)
 	}
+	fmt.Print(msg)
 }
