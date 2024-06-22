@@ -1,0 +1,13 @@
+global ABC
+
+ABC:
+    mov s0 "ABC %d"
+    mov bi0 5
+    
+    push s0
+    push bi0
+    
+    call printf
+    
+    pop bi0
+    pop s0
