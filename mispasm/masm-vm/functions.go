@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 const (
 	GLOBAL = iota
 	FUNC
@@ -35,7 +33,6 @@ func get_functions(data []byte) (global string, funcs map[string][]byte) {
 			}
 
 			funcs[name] = instructions
-			fmt.Printf("Function: %v\n", instructions)
 		}
 	}
 
@@ -81,8 +78,8 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 				}
 			}
 		} else if f_instructions[i+1] >= 1 && f_instructions[i+1] <= 11 {
-			offset = i + type_sizes[f_instructions[i+1]] + 2
-			arg_size = type_sizes[f_instructions[i+1]] + 1
+			offset = i + int(type_sizes[f_instructions[i+1]]) + 2
+			arg_size = int(type_sizes[f_instructions[i+1]] + 1)
 			arg1 = f_instructions[i+1 : offset]
 		} else {
 			panic("Invalid argument type\n")
@@ -100,8 +97,8 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 				}
 			}
 		} else if f_instructions[offset] >= 1 && f_instructions[offset] <= 11 {
-			arg_size = offset + type_sizes[f_instructions[offset]] - i
-			arg2 = f_instructions[offset : offset+type_sizes[f_instructions[offset]]+1]
+			arg_size = offset + int(type_sizes[f_instructions[offset]]) - i
+			arg2 = f_instructions[offset : offset+int(type_sizes[f_instructions[offset]])+1]
 		} else {
 			panic("Invalid argument type\n")
 		}

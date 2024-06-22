@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-var registers = make(map[string]byte)
+var registers = make(map[string]any)
 
 func main() {
 	data := read_exec(os.Args[1])
@@ -14,7 +14,7 @@ func main() {
 
 	run_function(funcs[global])
 
-	fmt.Printf("Result: %d\n", registers["r0"])
+	fmt.Printf("Result: %d\n", registers["rsi0"])
 }
 
 func read_exec(loc string) (data []byte) {

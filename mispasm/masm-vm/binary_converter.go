@@ -1,6 +1,6 @@
 package main
 
-type Type int
+type Type byte
 
 const (
 	INT8 Type = iota + 1
@@ -17,7 +17,7 @@ const (
 	STRING
 )
 
-var type_sizes = []int{-1, 1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, -1}
+var type_sizes = []byte{0, 1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0}
 
 func convert_to_value(data []byte) any {
 	switch data[0] {
