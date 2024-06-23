@@ -6,7 +6,6 @@
      Int  I
     UInt  UI
    Float  F
-    Char  C
   String  S
 
   Return  R
