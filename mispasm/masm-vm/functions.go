@@ -29,7 +29,7 @@ func get_functions(data []byte) (global string, funcs map[string]Function) {
 			}
 
 			instructions := []byte{}
-			for i += 1; data[i] != 0; {
+			for i += 1; data[i] != 255; {
 				_, _, _, _, arg_size := get_args(data, i)
 				for j := i; j <= i+arg_size; j++ {
 					instructions = append(instructions, data[j])

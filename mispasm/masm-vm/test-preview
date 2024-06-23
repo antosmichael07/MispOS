@@ -4,6 +4,8 @@ ABC:
     mov s0 "ABC %d"
     mov bi0 5
     mov bi1 bi0
+    add bi1 bi0
+    mov bi1 rbi0
 
     push s0
     push bi1
