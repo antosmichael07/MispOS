@@ -77,7 +77,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 					break
 				}
 			}
-		} else if f_instructions[i+1] >= 1 && f_instructions[i+1] <= 12 {
+		} else if f_instructions[i+1] >= 1 && f_instructions[i+1] <= 13 {
 			offset = i + int(type_sizes[f_instructions[i+1]]) + 2
 			arg_size = int(type_sizes[f_instructions[i+1]] + 1)
 			arg1 = f_instructions[i+1 : offset]
@@ -96,7 +96,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 					break
 				}
 			}
-		} else if f_instructions[offset] >= 1 && f_instructions[offset] <= 12 {
+		} else if f_instructions[offset] >= 1 && f_instructions[offset] <= 13 {
 			arg_size = offset + int(type_sizes[f_instructions[offset]]) - i
 			arg2 = f_instructions[offset : offset+int(type_sizes[f_instructions[offset]])+1]
 		} else {

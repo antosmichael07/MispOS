@@ -152,21 +152,21 @@ func init_instructions(funcs *map[string][]byte) {
 		}
 	}
 	instructions[PUSH] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(INT16) {
+		if arg1[0] != byte(REG) {
 			panic("Invalid argument type for PUSH\n")
 		} else {
 			stack_push(arg1[1], int(arg1[2]))
 		}
 	}
 	instructions[POP] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(INT16) {
+		if arg1[0] != byte(REG) {
 			panic("Invalid argument type for POP\n")
 		} else {
 			stack_pop(arg1[1], int(arg1[2]))
 		}
 	}
 	instructions[MOV] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(INT16) {
+		if arg1[0] != byte(REG) {
 			panic("Invalid arguments for MOV\n")
 		} else {
 			register_set(arg1[1], int(arg1[2]), ConvertToValue(arg2))
