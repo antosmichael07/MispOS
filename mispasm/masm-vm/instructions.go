@@ -1,7 +1,7 @@
 package main
 
 const (
-	ADD = iota + 1
+	ADD = iota
 	SUB
 	FCAL
 	MUL
@@ -14,9 +14,9 @@ const (
 	JMP
 )
 
-var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1}
+var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1}
 
-var instructions = make(map[byte]func([]byte, []byte))
+var instructions = [11]func([]byte, []byte){}
 
 func init_instructions(funcs *map[string]Function) {
 	instructions[ADD] = func(arg1 []byte, arg2 []byte) {

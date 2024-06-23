@@ -3,7 +3,7 @@ package main
 type Type byte
 
 const (
-	INT8 Type = iota + 1
+	INT8 Type = iota
 	INT16
 	INT32
 	INT64
@@ -18,7 +18,7 @@ const (
 	REG
 )
 
-var type_sizes = []byte{0, 1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0, 2}
+var type_sizes = []byte{1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0, 2}
 
 func ConvertToValue(data []byte) any {
 	switch data[0] {
