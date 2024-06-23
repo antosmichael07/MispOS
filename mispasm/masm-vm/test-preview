@@ -1,6 +1,6 @@
-global ABC
+global main
 
-ABC:
+main:
     mov s0 "Hello World!"
     push s0
     call printf
