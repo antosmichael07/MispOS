@@ -5,7 +5,12 @@ const (
 	FUNC
 )
 
-func get_functions(data []byte) (global string, funcs map[string][]byte) {
+type Function struct {
+	Instructions []byte
+	Labels       []int
+}
+
+func get_functions(data []byte) (global string, funcs map[string]Function) {
 	if data[0] == GLOBAL {
 		name := ""
 		for i := 1; data[i] != 0; i++ {
@@ -15,7 +20,7 @@ func get_functions(data []byte) (global string, funcs map[string][]byte) {
 	} else {
 		panic("Error, no global function\n")
 	}
-	funcs = make(map[string][]byte)
+	funcs = make(map[string]Function)
 	for i := 0; i < len(data); i++ {
 		if data[i] == FUNC {
 			name := ""
@@ -32,7 +37,19 @@ func get_functions(data []byte) (global string, funcs map[string][]byte) {
 				i += arg_size + 1
 			}
 
-			funcs[name] = instructions
+			labels := []int{}
+			for j := 0; j < len(instructions); {
+				_, _, _, _, arg_size := get_args(instructions, j)
+				if instructions[j] == LABEL {
+					labels = append(labels, j)
+				}
+				j += arg_size + 1
+			}
+
+			funcs[name] = Function{
+				Instructions: instructions,
+				Labels:       labels,
+			}
 		}
 	}
 
@@ -50,15 +67,25 @@ func get_functions(data []byte) (global string, funcs map[string][]byte) {
 	return global, funcs
 }
 
-func run_function(f_instructions []byte) {
-	for i := 0; i < len(f_instructions); i++ {
-		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(f_instructions, i)
+func run_function(function Function) {
+	for i := 0; i < len(function.Instructions); i++ {
+		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.Instructions, i)
+		if function.Instructions[i] == LABEL {
+			continue
+		}
+		if function.Instructions[i] == JMP {
+			if arg1[0] != byte(INT8) {
+				panic("Invalid argument for JMP\n")
+			}
+			i = function.Labels[int(arg1[1])]
+			continue
+		}
 		if is_arg1 && is_arg2 {
-			instructions[f_instructions[i]](arg1, arg2)
+			instructions[function.Instructions[i]](arg1, arg2)
 		} else if is_arg1 {
-			instructions[f_instructions[i]](arg1, []byte{})
+			instructions[function.Instructions[i]](arg1, []byte{})
 		} else {
-			instructions[f_instructions[i]]([]byte{}, []byte{})
+			instructions[function.Instructions[i]]([]byte{}, []byte{})
 		}
 		i += arg_size
 	}

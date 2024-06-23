@@ -7,7 +7,11 @@ ABC:
     push s0
     push bi0
     
+    jmp 0
+
     call printf
     
+    label
+
     pop bi0
     pop s0

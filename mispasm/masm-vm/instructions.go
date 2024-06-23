@@ -10,13 +10,15 @@ const (
 	PUSH
 	POP
 	MOV
+	LABEL
+	JMP
 )
 
-var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1, 2}
+var arg_sizes = []byte{0, 2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1}
 
 var instructions = make(map[byte]func([]byte, []byte))
 
-func init_instructions(funcs *map[string][]byte) {
+func init_instructions(funcs *map[string]Function) {
 	instructions[ADD] = func(arg1 []byte, arg2 []byte) {
 		if arg1[0] < byte(INT8) || arg2[0] < byte(INT8) || arg1[0] > byte(FLOAT64) || arg2[0] > byte(FLOAT64) {
 			panic("Invalid arguments for ADD\n")
