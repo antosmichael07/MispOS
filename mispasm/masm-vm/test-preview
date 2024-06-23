@@ -1,16 +1,7 @@
 global ABC
 
 ABC:
-    mov s0 "ABC %d"
-    mov bi0 5
-    mov bi1 bi0
-    mul bi1 bi0
-    mov bi1 rbi0
-
+    mov s0 "Hello World!"
     push s0
-    push bi1
-
     call printf
-
-    pop bi1
     pop s0
