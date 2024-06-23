@@ -5,8 +5,6 @@ import (
 	"os"
 )
 
-var registers = make(map[string]any)
-
 func main() {
 	data := read_exec(os.Args[1])
 	global, funcs := get_functions(data)

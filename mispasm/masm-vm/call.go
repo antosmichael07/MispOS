@@ -19,11 +19,11 @@ func print_stack() {
 	continu := false
 	for _, v := range stack {
 		if !continu {
-			msg = v.(string)
+			msg = v.Data.(string)
 			continu = true
 			continue
 		}
-		msg = fmt.Sprintf(msg, v)
+		msg = fmt.Sprintf(msg, v.Data)
 	}
 	fmt.Print(msg)
 }

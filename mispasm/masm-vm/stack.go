@@ -1,11 +1,21 @@
 package main
 
-var stack = make(map[string]any)
+type Stack struct {
+	Name string
+	Data any
+}
+
+var stack = []Stack{}
 
 func stack_push(reg string, data any) {
-	stack[reg] = data
+	stack = append(stack, Stack{reg, data})
 }
 
 func stack_pop(reg string) {
-	delete(stack, reg)
+	for i, v := range stack {
+		if v.Name == reg {
+			stack = append(stack[:i], stack[i+1:]...)
+			break
+		}
+	}
 }
