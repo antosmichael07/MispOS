@@ -168,10 +168,6 @@ func init_instructions(funcs *map[string]Function) {
 		}
 	}
 	instructions[MOV] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(REG) {
-			panic("Invalid arguments for MOV\n")
-		} else {
-			register_set(arg1[1], int(arg1[2]), ConvertToValue(arg2))
-		}
+		register_set(arg1[1], int(arg1[2]), ConvertToValue(arg2))
 	}
 }

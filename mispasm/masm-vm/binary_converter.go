@@ -46,6 +46,8 @@ func ConvertToValue(data []byte) any {
 		return ByteToBool(data[1])
 	case byte(STRING):
 		return BytesToString(data[1:])
+	case byte(REG):
+		return register_get(data[1], int(data[2]))
 	}
 	return nil
 }

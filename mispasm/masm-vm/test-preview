@@ -3,11 +3,12 @@ global ABC
 ABC:
     mov s0 "ABC %d"
     mov bi0 5
+    mov bi1 bi0
 
     push s0
-    push bi0
+    push bi1
 
     call printf
 
-    pop bi0
+    pop bi1
     pop s0
