@@ -20,7 +20,7 @@ const (
 
 var type_sizes = []byte{0, 1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0}
 
-func convert_to_value(data []byte) any {
+func ConvertToValue(data []byte) any {
 	switch data[0] {
 	case byte(INT8):
 		return ByteToInt8(data[1])
@@ -52,7 +52,7 @@ func convert_to_value(data []byte) any {
 	return nil
 }
 
-func convert_to_bytes(t Type, data any) []byte {
+func ConvertToBytes(t Type, data any) []byte {
 	bytes := []byte{}
 	switch t {
 	case INT8:

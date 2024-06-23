@@ -169,7 +169,7 @@ func init_instructions(funcs *map[string][]byte) {
 		if arg1[0] != byte(INT16) {
 			panic("Invalid arguments for MOV\n")
 		} else {
-			register_set(arg1[1], int(arg1[2]), convert_to_value(arg2))
+			register_set(arg1[1], int(arg1[2]), ConvertToValue(arg2))
 		}
 	}
 }
