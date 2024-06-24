@@ -81,61 +81,61 @@ func compare(function *Function, index *int) func([]byte, []byte) {
 				}
 			case byte(REG):
 				switch REGISTER_CMP[0][1] {
-				case byte(BI):
+				case byte(BI), byte(RBI):
 					if ConvertToValue(REGISTER_CMP[0]).(int8) > ConvertToValue(REGISTER_CMP[1]).(int8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SI):
+				case byte(SI), byte(RSI):
 					if ConvertToValue(REGISTER_CMP[0]).(int16) > ConvertToValue(REGISTER_CMP[1]).(int16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LI):
+				case byte(LI), byte(RLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int32) > ConvertToValue(REGISTER_CMP[1]).(int32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLI):
+				case byte(LLI), byte(RLLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int64) > ConvertToValue(REGISTER_CMP[1]).(int64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(BUI):
+				case byte(BUI), byte(RBUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint8) > ConvertToValue(REGISTER_CMP[1]).(uint8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SUI):
+				case byte(SUI), byte(RSUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint16) > ConvertToValue(REGISTER_CMP[1]).(uint16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LUI):
+				case byte(LUI), byte(RLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint32) > ConvertToValue(REGISTER_CMP[1]).(uint32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLUI):
+				case byte(LLUI), byte(RLLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint64) > ConvertToValue(REGISTER_CMP[1]).(uint64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LF):
+				case byte(LF), byte(RLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float32) > ConvertToValue(REGISTER_CMP[1]).(float32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLF):
+				case byte(LLF), byte(RLLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float64) > ConvertToValue(REGISTER_CMP[1]).(float64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
@@ -211,61 +211,61 @@ func compare(function *Function, index *int) func([]byte, []byte) {
 				}
 			case byte(REG):
 				switch REGISTER_CMP[0][1] {
-				case byte(BI):
+				case byte(BI), byte(RBI):
 					if ConvertToValue(REGISTER_CMP[0]).(int8) >= ConvertToValue(REGISTER_CMP[1]).(int8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SI):
+				case byte(SI), byte(RSI):
 					if ConvertToValue(REGISTER_CMP[0]).(int16) >= ConvertToValue(REGISTER_CMP[1]).(int16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LI):
+				case byte(LI), byte(RLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int32) >= ConvertToValue(REGISTER_CMP[1]).(int32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLI):
+				case byte(LLI), byte(RLLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int64) >= ConvertToValue(REGISTER_CMP[1]).(int64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(BUI):
+				case byte(BUI), byte(RBUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint8) >= ConvertToValue(REGISTER_CMP[1]).(uint8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SUI):
+				case byte(SUI), byte(RSUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint16) >= ConvertToValue(REGISTER_CMP[1]).(uint16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LUI):
+				case byte(LUI), byte(RLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint32) >= ConvertToValue(REGISTER_CMP[1]).(uint32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLUI):
+				case byte(LLUI), byte(RLLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint64) >= ConvertToValue(REGISTER_CMP[1]).(uint64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LF):
+				case byte(LF), byte(RLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float32) >= ConvertToValue(REGISTER_CMP[1]).(float32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLF):
+				case byte(LLF), byte(RLLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float64) >= ConvertToValue(REGISTER_CMP[1]).(float64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
@@ -341,61 +341,61 @@ func compare(function *Function, index *int) func([]byte, []byte) {
 				}
 			case byte(REG):
 				switch REGISTER_CMP[0][1] {
-				case byte(BI):
+				case byte(BI), byte(RBI):
 					if ConvertToValue(REGISTER_CMP[0]).(int8) < ConvertToValue(REGISTER_CMP[1]).(int8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SI):
+				case byte(SI), byte(RSI):
 					if ConvertToValue(REGISTER_CMP[0]).(int16) < ConvertToValue(REGISTER_CMP[1]).(int16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LI):
+				case byte(LI), byte(RLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int32) < ConvertToValue(REGISTER_CMP[1]).(int32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLI):
+				case byte(LLI), byte(RLLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int64) < ConvertToValue(REGISTER_CMP[1]).(int64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(BUI):
+				case byte(BUI), byte(RBUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint8) < ConvertToValue(REGISTER_CMP[1]).(uint8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SUI):
+				case byte(SUI), byte(RSUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint16) < ConvertToValue(REGISTER_CMP[1]).(uint16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LUI):
+				case byte(LUI), byte(RLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint32) < ConvertToValue(REGISTER_CMP[1]).(uint32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLUI):
+				case byte(LLUI), byte(RLLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint64) < ConvertToValue(REGISTER_CMP[1]).(uint64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LF):
+				case byte(LF), byte(RLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float32) < ConvertToValue(REGISTER_CMP[1]).(float32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLF):
+				case byte(LLF), byte(RLLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float64) < ConvertToValue(REGISTER_CMP[1]).(float64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
@@ -471,61 +471,61 @@ func compare(function *Function, index *int) func([]byte, []byte) {
 				}
 			case byte(REG):
 				switch REGISTER_CMP[0][1] {
-				case byte(BI):
+				case byte(BI), byte(RBI):
 					if ConvertToValue(REGISTER_CMP[0]).(int8) <= ConvertToValue(REGISTER_CMP[1]).(int8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SI):
+				case byte(SI), byte(RSI):
 					if ConvertToValue(REGISTER_CMP[0]).(int16) <= ConvertToValue(REGISTER_CMP[1]).(int16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LI):
+				case byte(LI), byte(RLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int32) <= ConvertToValue(REGISTER_CMP[1]).(int32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLI):
+				case byte(LLI), byte(RLLI):
 					if ConvertToValue(REGISTER_CMP[0]).(int64) <= ConvertToValue(REGISTER_CMP[1]).(int64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(BUI):
+				case byte(BUI), byte(RBUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint8) <= ConvertToValue(REGISTER_CMP[1]).(uint8) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(SUI):
+				case byte(SUI), byte(RSUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint16) <= ConvertToValue(REGISTER_CMP[1]).(uint16) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LUI):
+				case byte(LUI), byte(RLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint32) <= ConvertToValue(REGISTER_CMP[1]).(uint32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLUI):
+				case byte(LLUI), byte(RLLUI):
 					if ConvertToValue(REGISTER_CMP[0]).(uint64) <= ConvertToValue(REGISTER_CMP[1]).(uint64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LF):
+				case byte(LF), byte(RLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float32) <= ConvertToValue(REGISTER_CMP[1]).(float32) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
 						*index = function.Labels[int(arg2[1])]
 					}
-				case byte(LLF):
+				case byte(LLF), byte(RLLF):
 					if ConvertToValue(REGISTER_CMP[0]).(float64) <= ConvertToValue(REGISTER_CMP[1]).(float64) {
 						*index = function.Labels[int(arg1[1])]
 					} else {
