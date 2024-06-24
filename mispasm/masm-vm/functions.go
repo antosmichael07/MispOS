@@ -80,6 +80,10 @@ func run_function(function Function) {
 			i = function.Labels[int(arg1[1])]
 			continue
 		}
+		if function.Instructions[i] == JE {
+			compare(&function, &i)(arg1, arg2)
+			continue
+		}
 		if is_arg1 && is_arg2 {
 			instructions[function.Instructions[i]](arg1, arg2)
 		} else if is_arg1 {
