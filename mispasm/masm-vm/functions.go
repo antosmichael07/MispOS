@@ -80,7 +80,7 @@ func run_function(function Function) {
 			i = function.Labels[int(arg1[1])]
 			continue
 		}
-		if function.Instructions[i] == JE {
+		if function.Instructions[i] == JE || function.Instructions[i] == JNE || function.Instructions[i] == JG || function.Instructions[i] == JGE || function.Instructions[i] == JL || function.Instructions[i] == JLE {
 			compare(&function, &i)(arg1, arg2)
 			continue
 		}
