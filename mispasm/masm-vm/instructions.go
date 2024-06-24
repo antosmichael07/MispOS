@@ -15,11 +15,16 @@ const (
 	MOD
 	CMP
 	JE
+	JNE
+	JG
+	JGE
+	JL
+	JLE
 )
 
-var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2}
+var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2}
 
-var instructions = [14]func([]byte, []byte){}
+var instructions = [19]func([]byte, []byte){}
 
 func init_instructions(funcs *map[string]Function) {
 	instructions[ADD] = get_math_operation_func(0)
