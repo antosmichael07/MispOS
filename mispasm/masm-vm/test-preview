@@ -3,7 +3,7 @@ global main
 main:
     mov bi0 7
     cmp bi0 5
-    je 1 0
+    jl 1 0
 
     label
 
