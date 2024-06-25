@@ -1,9 +1,7 @@
 package main
 
-type Type byte
-
 const (
-	INT8 Type = iota
+	INT8 byte = iota
 	INT16
 	INT32
 	INT64
@@ -22,37 +20,37 @@ var type_sizes = []byte{1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0, 2}
 
 func ConvertToValue(data []byte) any {
 	switch data[0] {
-	case byte(INT8):
+	case INT8:
 		return ByteToInt8(data[1])
-	case byte(INT16):
+	case INT16:
 		return BytesToInt16(data[1:])
-	case byte(INT32):
+	case INT32:
 		return BytesToInt32(data[1:])
-	case byte(INT64):
+	case INT64:
 		return BytesToInt64(data[1:])
-	case byte(UINT8):
+	case UINT8:
 		return ByteToUint8(data[1])
-	case byte(UINT16):
+	case UINT16:
 		return BytesToUint16(data[1:])
-	case byte(UINT32):
+	case UINT32:
 		return BytesToUint32(data[1:])
-	case byte(UINT64):
+	case UINT64:
 		return BytesToUint64(data[1:])
-	case byte(FLOAT32):
+	case FLOAT32:
 		return BytesToFloat32(data[1:])
-	case byte(FLOAT64):
+	case FLOAT64:
 		return BytesToFloat64(data[1:])
-	case byte(BOOL):
+	case BOOL:
 		return ByteToBool(data[1])
-	case byte(STRING):
+	case STRING:
 		return BytesToString(data[1:])
-	case byte(REG):
+	case REG:
 		return register_get(data[1], int(data[2]))
 	}
 	return nil
 }
 
-func ConvertToBytes(t Type, data any) []byte {
+func ConvertToBytes(t byte, data any) []byte {
 	bytes := []byte{}
 	switch t {
 	case INT8:
@@ -80,7 +78,7 @@ func ConvertToBytes(t Type, data any) []byte {
 	case STRING:
 		bytes = StringToBytes(data.(string))
 	}
-	return append([]byte{byte(t)}, bytes...)
+	return append([]byte{t}, bytes...)
 }
 
 func Int8ToByte(i int8) byte {

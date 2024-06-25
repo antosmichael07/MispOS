@@ -9,6 +9,7 @@ func main() {
 	data := read_exec(os.Args[1])
 	global, funcs := get_functions(data)
 	init_instructions(&funcs)
+	init_calls()
 
 	run_function(funcs[global])
 }

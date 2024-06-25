@@ -3,13 +3,15 @@ package main
 import "fmt"
 
 const (
-	PRINTF = iota
+	PRINTF byte = iota
 )
 
-var calls = []func([]byte, []byte){
-	func(arg1 []byte, arg2 []byte) {
+var calls = [1]func([]byte, []byte){}
+
+func init_calls() {
+	calls[PRINTF] = func(arg1 []byte, arg2 []byte) {
 		print_stack()
-	},
+	}
 }
 
 func print_stack() {

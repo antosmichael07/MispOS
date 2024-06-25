@@ -1,7 +1,7 @@
 package main
 
 const (
-	ADD = iota
+	ADD byte = iota
 	SUB
 	FCAL
 	MUL
@@ -30,7 +30,7 @@ func init_instructions(funcs *map[string]Function) {
 	instructions[ADD] = get_math_operation_func(0)
 	instructions[SUB] = get_math_operation_func(1)
 	instructions[FCAL] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(STRING) {
+		if arg1[0] != STRING {
 			panic("Invalid argument type for CAL\n")
 		} else {
 			run_function((*funcs)[string(arg1[1:len(arg1)-1])])
@@ -39,21 +39,21 @@ func init_instructions(funcs *map[string]Function) {
 	instructions[MUL] = get_math_operation_func(2)
 	instructions[DIV] = get_math_operation_func(3)
 	instructions[CALL] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(INT8) {
+		if arg1[0] != INT8 {
 			panic("Invalid argument type for CALL\n")
 		} else {
-			calls[int(arg1[1])]([]byte{}, []byte{})
+			calls[arg1[1]]([]byte{}, []byte{})
 		}
 	}
 	instructions[PUSH] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(REG) {
+		if arg1[0] != REG {
 			panic("Invalid argument type for PUSH\n")
 		} else {
 			stack_push(arg1[1], int(arg1[2]))
 		}
 	}
 	instructions[POP] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != byte(REG) {
+		if arg1[0] != REG {
 			panic("Invalid argument type for POP\n")
 		} else {
 			stack_pop(arg1[1], int(arg1[2]))
@@ -64,7 +64,7 @@ func init_instructions(funcs *map[string]Function) {
 	}
 	instructions[MOD] = get_math_operation_func(4)
 	instructions[CMP] = func(arg1 []byte, arg2 []byte) {
-		if arg1[0] != arg2[0] && arg1[0] != byte(REG) && arg2[0] != byte(REG) {
+		if arg1[0] != arg2[0] && arg1[0] != REG && arg2[0] != REG {
 			panic("Invalid argument type for CMP\n")
 		}
 

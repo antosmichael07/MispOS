@@ -1,7 +1,7 @@
 package main
 
 const (
-	BI = iota
+	BI byte = iota
 	SI
 	LI
 	LLI
@@ -50,98 +50,98 @@ var REGISTER_RS = [256]string{}
 
 func register_set(reg byte, index int, data any) {
 	switch reg {
-	case byte(BI):
+	case BI:
 		REGISTER_BI[index] = data.(int8)
-	case byte(SI):
+	case SI:
 		REGISTER_SI[index] = data.(int16)
-	case byte(LI):
+	case LI:
 		REGISTER_LI[index] = data.(int32)
-	case byte(LLI):
+	case LLI:
 		REGISTER_LLI[index] = data.(int64)
-	case byte(BUI):
+	case BUI:
 		REGISTER_BUI[index] = data.(uint8)
-	case byte(SUI):
+	case SUI:
 		REGISTER_SUI[index] = data.(uint16)
-	case byte(LUI):
+	case LUI:
 		REGISTER_LUI[index] = data.(uint32)
-	case byte(LLUI):
+	case LLUI:
 		REGISTER_LLUI[index] = data.(uint64)
-	case byte(LF):
+	case LF:
 		REGISTER_LF[index] = data.(float32)
-	case byte(LLF):
+	case LLF:
 		REGISTER_LLF[index] = data.(float64)
-	case byte(S):
+	case S:
 		REGISTER_S[index] = data.(string)
-	case byte(RBI):
+	case RBI:
 		REGISTER_RBI[index] = data.(int8)
-	case byte(RSI):
+	case RSI:
 		REGISTER_RSI[index] = data.(int16)
-	case byte(RLI):
+	case RLI:
 		REGISTER_RLI[index] = data.(int32)
-	case byte(RLLI):
+	case RLLI:
 		REGISTER_RLLI[index] = data.(int64)
-	case byte(RBUI):
+	case RBUI:
 		REGISTER_RBUI[index] = data.(uint8)
-	case byte(RSUI):
+	case RSUI:
 		REGISTER_RSUI[index] = data.(uint16)
-	case byte(RLUI):
+	case RLUI:
 		REGISTER_RLUI[index] = data.(uint32)
-	case byte(RLLUI):
+	case RLLUI:
 		REGISTER_RLLUI[index] = data.(uint64)
-	case byte(RLF):
+	case RLF:
 		REGISTER_RLF[index] = data.(float32)
-	case byte(RLLF):
+	case RLLF:
 		REGISTER_RLLF[index] = data.(float64)
-	case byte(RS):
+	case RS:
 		REGISTER_RS[index] = data.(string)
 	}
 }
 
 func register_get(reg byte, index int) any {
 	switch reg {
-	case byte(BI):
+	case BI:
 		return REGISTER_BI[index]
-	case byte(SI):
+	case SI:
 		return REGISTER_SI[index]
-	case byte(LI):
+	case LI:
 		return REGISTER_LI[index]
-	case byte(LLI):
+	case LLI:
 		return REGISTER_LLI[index]
-	case byte(BUI):
+	case BUI:
 		return REGISTER_BUI[index]
-	case byte(SUI):
+	case SUI:
 		return REGISTER_SUI[index]
-	case byte(LUI):
+	case LUI:
 		return REGISTER_LUI[index]
-	case byte(LLUI):
+	case LLUI:
 		return REGISTER_LLUI[index]
-	case byte(LF):
+	case LF:
 		return REGISTER_LF[index]
-	case byte(LLF):
+	case LLF:
 		return REGISTER_LLF[index]
-	case byte(S):
+	case S:
 		return REGISTER_S[index]
-	case byte(RBI):
+	case RBI:
 		return REGISTER_RBI[index]
-	case byte(RSI):
+	case RSI:
 		return REGISTER_RSI[index]
-	case byte(RLI):
+	case RLI:
 		return REGISTER_RLI[index]
-	case byte(RLLI):
+	case RLLI:
 		return REGISTER_RLLI[index]
-	case byte(RBUI):
+	case RBUI:
 		return REGISTER_RBUI[index]
-	case byte(RSUI):
+	case RSUI:
 		return REGISTER_RSUI[index]
-	case byte(RLUI):
+	case RLUI:
 		return REGISTER_RLUI[index]
-	case byte(RLLUI):
+	case RLLUI:
 		return REGISTER_RLLUI[index]
-	case byte(RLF):
+	case RLF:
 		return REGISTER_RLF[index]
-	case byte(RLLF):
+	case RLLF:
 		return REGISTER_RLLF[index]
-	case byte(RS):
+	case RS:
 		return REGISTER_RS[index]
 	}
 	return nil

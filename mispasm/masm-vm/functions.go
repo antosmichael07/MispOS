@@ -1,7 +1,7 @@
 package main
 
 const (
-	GLOBAL = iota
+	GLOBAL byte = iota
 	FUNC
 )
 
@@ -74,7 +74,7 @@ func run_function(function Function) {
 			continue
 		}
 		if function.Instructions[i] == JMP {
-			if arg1[0] != byte(INT8) {
+			if arg1[0] != INT8 {
 				panic("Invalid argument for JMP\n")
 			}
 			i = function.Labels[int(arg1[1])]
@@ -99,7 +99,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 	offset := 0
 	if arg_sizes[f_instructions[i]] >= 1 {
 		is_arg1 = true
-		if f_instructions[i+1] == byte(STRING) {
+		if f_instructions[i+1] == STRING {
 			for j := i + 1; j < len(f_instructions); j++ {
 				if f_instructions[j] == 0 {
 					offset = j + 1
@@ -119,7 +119,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 
 	if arg_sizes[f_instructions[i]] >= 2 {
 		is_arg2 = true
-		if f_instructions[offset] == byte(STRING) {
+		if f_instructions[offset] == STRING {
 			for j := offset; j < len(f_instructions); j++ {
 				if f_instructions[j] == 0 {
 					arg_size = j - i
