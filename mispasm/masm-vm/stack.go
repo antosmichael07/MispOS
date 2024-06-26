@@ -9,7 +9,7 @@ type Stack struct {
 var stack = []Stack{}
 
 func stack_push(reg byte, index int) {
-	stack = append(stack, Stack{reg, index, register_get(reg, index)})
+	stack = append(stack, Stack{reg, index, register_get[reg](index)})
 }
 
 func stack_pop(reg byte, index int) {

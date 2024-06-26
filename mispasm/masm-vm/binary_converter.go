@@ -1,24 +1,6 @@
 package main
 
-const (
-	INT8 byte = iota
-	INT16
-	INT32
-	INT64
-	UINT8
-	UINT16
-	UINT32
-	UINT64
-	FLOAT32
-	FLOAT64
-	BOOL
-	STRING
-	REG
-)
-
-var type_sizes = []byte{1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0, 2}
-
-func ConvertToValue(data []byte) any {
+func convert_to_value(data []byte) any {
 	switch data[0] {
 	case INT8:
 		return ByteToInt8(data[1])
@@ -45,12 +27,12 @@ func ConvertToValue(data []byte) any {
 	case STRING:
 		return BytesToString(data[1:])
 	case REG:
-		return register_get(data[1], int(data[2]))
+		return register_get[data[1]](int(data[2]))
 	}
 	return nil
 }
 
-func ConvertToBytes(t byte, data any) []byte {
+func convert_to_bytes(t byte, data any) []byte {
 	bytes := []byte{}
 	switch t {
 	case INT8:

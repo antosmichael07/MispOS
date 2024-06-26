@@ -48,101 +48,52 @@ var REGISTER_RLF = [256]float32{}
 var REGISTER_RLLF = [256]float64{}
 var REGISTER_RS = [256]string{}
 
-func register_set(reg byte, index int, data any) {
-	switch reg {
-	case BI:
-		REGISTER_BI[index] = data.(int8)
-	case SI:
-		REGISTER_SI[index] = data.(int16)
-	case LI:
-		REGISTER_LI[index] = data.(int32)
-	case LLI:
-		REGISTER_LLI[index] = data.(int64)
-	case BUI:
-		REGISTER_BUI[index] = data.(uint8)
-	case SUI:
-		REGISTER_SUI[index] = data.(uint16)
-	case LUI:
-		REGISTER_LUI[index] = data.(uint32)
-	case LLUI:
-		REGISTER_LLUI[index] = data.(uint64)
-	case LF:
-		REGISTER_LF[index] = data.(float32)
-	case LLF:
-		REGISTER_LLF[index] = data.(float64)
-	case S:
-		REGISTER_S[index] = data.(string)
-	case RBI:
-		REGISTER_RBI[index] = data.(int8)
-	case RSI:
-		REGISTER_RSI[index] = data.(int16)
-	case RLI:
-		REGISTER_RLI[index] = data.(int32)
-	case RLLI:
-		REGISTER_RLLI[index] = data.(int64)
-	case RBUI:
-		REGISTER_RBUI[index] = data.(uint8)
-	case RSUI:
-		REGISTER_RSUI[index] = data.(uint16)
-	case RLUI:
-		REGISTER_RLUI[index] = data.(uint32)
-	case RLLUI:
-		REGISTER_RLLUI[index] = data.(uint64)
-	case RLF:
-		REGISTER_RLF[index] = data.(float32)
-	case RLLF:
-		REGISTER_RLLF[index] = data.(float64)
-	case RS:
-		REGISTER_RS[index] = data.(string)
-	}
+var register_set = [22]func(index byte, data any){
+	func(index byte, data any) { REGISTER_BI[index] = data.(int8) },
+	func(index byte, data any) { REGISTER_SI[index] = data.(int16) },
+	func(index byte, data any) { REGISTER_LI[index] = data.(int32) },
+	func(index byte, data any) { REGISTER_LLI[index] = data.(int64) },
+	func(index byte, data any) { REGISTER_BUI[index] = data.(uint8) },
+	func(index byte, data any) { REGISTER_SUI[index] = data.(uint16) },
+	func(index byte, data any) { REGISTER_LUI[index] = data.(uint32) },
+	func(index byte, data any) { REGISTER_LLUI[index] = data.(uint64) },
+	func(index byte, data any) { REGISTER_LF[index] = data.(float32) },
+	func(index byte, data any) { REGISTER_LLF[index] = data.(float64) },
+	func(index byte, data any) { REGISTER_S[index] = data.(string) },
+	func(index byte, data any) { REGISTER_RBI[index] = data.(int8) },
+	func(index byte, data any) { REGISTER_RSI[index] = data.(int16) },
+	func(index byte, data any) { REGISTER_RLI[index] = data.(int32) },
+	func(index byte, data any) { REGISTER_RLLI[index] = data.(int64) },
+	func(index byte, data any) { REGISTER_RBUI[index] = data.(uint8) },
+	func(index byte, data any) { REGISTER_RSUI[index] = data.(uint16) },
+	func(index byte, data any) { REGISTER_RLUI[index] = data.(uint32) },
+	func(index byte, data any) { REGISTER_RLLUI[index] = data.(uint64) },
+	func(index byte, data any) { REGISTER_RLF[index] = data.(float32) },
+	func(index byte, data any) { REGISTER_RLLF[index] = data.(float64) },
+	func(index byte, data any) { REGISTER_RS[index] = data.(string) },
 }
 
-func register_get(reg byte, index int) any {
-	switch reg {
-	case BI:
-		return REGISTER_BI[index]
-	case SI:
-		return REGISTER_SI[index]
-	case LI:
-		return REGISTER_LI[index]
-	case LLI:
-		return REGISTER_LLI[index]
-	case BUI:
-		return REGISTER_BUI[index]
-	case SUI:
-		return REGISTER_SUI[index]
-	case LUI:
-		return REGISTER_LUI[index]
-	case LLUI:
-		return REGISTER_LLUI[index]
-	case LF:
-		return REGISTER_LF[index]
-	case LLF:
-		return REGISTER_LLF[index]
-	case S:
-		return REGISTER_S[index]
-	case RBI:
-		return REGISTER_RBI[index]
-	case RSI:
-		return REGISTER_RSI[index]
-	case RLI:
-		return REGISTER_RLI[index]
-	case RLLI:
-		return REGISTER_RLLI[index]
-	case RBUI:
-		return REGISTER_RBUI[index]
-	case RSUI:
-		return REGISTER_RSUI[index]
-	case RLUI:
-		return REGISTER_RLUI[index]
-	case RLLUI:
-		return REGISTER_RLLUI[index]
-	case RLF:
-		return REGISTER_RLF[index]
-	case RLLF:
-		return REGISTER_RLLF[index]
-	case RS:
-		return REGISTER_RS[index]
-	}
-	return nil
+var register_get = [22]func(index int) any{
+	func(index int) any { return REGISTER_BI[index] },
+	func(index int) any { return REGISTER_SI[index] },
+	func(index int) any { return REGISTER_LI[index] },
+	func(index int) any { return REGISTER_LLI[index] },
+	func(index int) any { return REGISTER_BUI[index] },
+	func(index int) any { return REGISTER_SUI[index] },
+	func(index int) any { return REGISTER_LUI[index] },
+	func(index int) any { return REGISTER_LLUI[index] },
+	func(index int) any { return REGISTER_LF[index] },
+	func(index int) any { return REGISTER_LLF[index] },
+	func(index int) any { return REGISTER_S[index] },
+	func(index int) any { return REGISTER_RBI[index] },
+	func(index int) any { return REGISTER_RSI[index] },
+	func(index int) any { return REGISTER_RLI[index] },
+	func(index int) any { return REGISTER_RLLI[index] },
+	func(index int) any { return REGISTER_RBUI[index] },
+	func(index int) any { return REGISTER_RSUI[index] },
+	func(index int) any { return REGISTER_RLUI[index] },
+	func(index int) any { return REGISTER_RLLUI[index] },
+	func(index int) any { return REGISTER_RLF[index] },
+	func(index int) any { return REGISTER_RLLF[index] },
+	func(index int) any { return REGISTER_RS[index] },
 }

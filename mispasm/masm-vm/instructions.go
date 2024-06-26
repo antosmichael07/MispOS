@@ -60,7 +60,7 @@ func init_instructions(funcs *map[string]Function) {
 		}
 	}
 	instructions[MOV] = func(arg1 []byte, arg2 []byte) {
-		register_set(arg1[1], int(arg1[2]), ConvertToValue(arg2))
+		register_set[arg1[1]](arg1[2], convert_to_value(arg2))
 	}
 	instructions[MOD] = get_math_operation_func(4)
 	instructions[CMP] = func(arg1 []byte, arg2 []byte) {
