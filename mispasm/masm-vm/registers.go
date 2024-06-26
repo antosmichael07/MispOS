@@ -48,7 +48,7 @@ var REGISTER_RLF = [256]float32{}
 var REGISTER_RLLF = [256]float64{}
 var REGISTER_RS = [256]string{}
 
-var register_set = [22]func(index byte, data any){
+var register_set = [22]func(byte, any){
 	func(index byte, data any) { REGISTER_BI[index] = data.(int8) },
 	func(index byte, data any) { REGISTER_SI[index] = data.(int16) },
 	func(index byte, data any) { REGISTER_LI[index] = data.(int32) },
@@ -73,7 +73,7 @@ var register_set = [22]func(index byte, data any){
 	func(index byte, data any) { REGISTER_RS[index] = data.(string) },
 }
 
-var register_get = [22]func(index int) any{
+var register_get = [22]func(int) any{
 	func(index int) any { return REGISTER_BI[index] },
 	func(index int) any { return REGISTER_SI[index] },
 	func(index int) any { return REGISTER_LI[index] },

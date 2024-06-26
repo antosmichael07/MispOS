@@ -11,57 +11,39 @@ type Function struct {
 }
 
 func get_functions(data []byte) (global string, funcs map[string]Function) {
-	if data[0] == GLOBAL {
-		name := ""
-		for i := 1; data[i] != 0; i++ {
-			name += string(data[i])
-		}
-		global = name
-	} else {
-		panic("Error, no global function\n")
+	i := 0
+	for ; data[i] != 0; i++ {
+		global += string(data[i])
 	}
 	funcs = make(map[string]Function)
-	for i := 0; i < len(data); i++ {
-		if data[i] == FUNC {
-			name := ""
-			for i += 1; data[i] != 0; i++ {
-				name += string(data[i])
-			}
-
-			instructions := []byte{}
-			for i += 1; data[i] != 255; {
-				_, _, _, _, arg_size := get_args(data, i)
-				for j := i; j <= i+arg_size; j++ {
-					instructions = append(instructions, data[j])
-				}
-				i += arg_size + 1
-			}
-
-			labels := []int{}
-			for j := 0; j < len(instructions); {
-				_, _, _, _, arg_size := get_args(instructions, j)
-				if instructions[j] == LABEL {
-					labels = append(labels, j)
-				}
-				j += arg_size + 1
-			}
-
-			funcs[name] = Function{
-				Instructions: instructions,
-				Labels:       labels,
-			}
+	for i += 1; i < len(data); i++ {
+		name := ""
+		for ; data[i] != 0; i++ {
+			name += string(data[i])
 		}
-	}
 
-	is_global_valid := false
-	for i := range funcs {
-		if i == global {
-			is_global_valid = true
-			break
+		instructions := []byte{}
+		for i += 1; data[i] != 255; {
+			_, _, _, _, arg_size := get_args(data, i)
+			for j := i; j <= i+arg_size; j++ {
+				instructions = append(instructions, data[j])
+			}
+			i += arg_size + 1
 		}
-	}
-	if !is_global_valid {
-		panic("Error, global isn't a function\n")
+
+		labels := []int{}
+		for j := 0; j < len(instructions); {
+			_, _, _, _, arg_size := get_args(instructions, j)
+			if instructions[j] == LABEL {
+				labels = append(labels, j)
+			}
+			j += arg_size + 1
+		}
+
+		funcs[name] = Function{
+			Instructions: instructions,
+			Labels:       labels,
+		}
 	}
 
 	return global, funcs
@@ -74,10 +56,7 @@ func run_function(function Function) {
 			continue
 		}
 		if function.Instructions[i] == JMP {
-			if arg1[0] != INT8 {
-				panic("Invalid argument for JMP\n")
-			}
-			i = function.Labels[int(arg1[1])]
+			i = function.Labels[arg1[1]]
 			continue
 		}
 		if function.Instructions[i] == JE || function.Instructions[i] == JNE || function.Instructions[i] == JG || function.Instructions[i] == JGE || function.Instructions[i] == JL || function.Instructions[i] == JLE {
@@ -108,12 +87,10 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 					break
 				}
 			}
-		} else if f_instructions[i+1] <= byte(len(type_sizes)-1) {
+		} else {
 			offset = i + int(type_sizes[f_instructions[i+1]]) + 2
 			arg_size = int(type_sizes[f_instructions[i+1]] + 1)
 			arg1 = f_instructions[i+1 : offset]
-		} else {
-			panic("Invalid argument type\n")
 		}
 	}
 
@@ -127,11 +104,9 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 					break
 				}
 			}
-		} else if f_instructions[offset] <= byte(len(type_sizes)-1) {
+		} else {
 			arg_size = offset + int(type_sizes[f_instructions[offset]]) - i
 			arg2 = f_instructions[offset : offset+int(type_sizes[f_instructions[offset]])+1]
-		} else {
-			panic("Invalid argument type\n")
 		}
 	}
 
