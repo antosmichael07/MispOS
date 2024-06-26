@@ -106,7 +106,7 @@ var add_math_operation = [13]func([]byte, []byte){
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {
-		add_math_operation_reg[arg1[1]%10](convert_to_value(arg1), convert_to_value(arg2))
+		add_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
 
@@ -217,7 +217,7 @@ var sub_math_operation = [13]func([]byte, []byte){
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {
-		sub_math_operation_reg[arg1[1]%10](convert_to_value(arg1), convert_to_value(arg2))
+		sub_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
 
@@ -328,7 +328,7 @@ var mul_math_operation = [13]func([]byte, []byte){
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {
-		mul_math_operation_reg[arg1[1]%10](convert_to_value(arg1), convert_to_value(arg2))
+		mul_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
 
@@ -439,7 +439,7 @@ var div_math_operation = [13]func([]byte, []byte){
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {
-		div_math_operation_reg[arg1[1]%10](convert_to_value(arg1), convert_to_value(arg2))
+		div_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
 
@@ -550,6 +550,6 @@ var mod_math_operation = [13]func([]byte, []byte){
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {},
 	func(arg1 []byte, arg2 []byte) {
-		mod_math_operation_reg[arg1[1]%10](convert_to_value(arg1), convert_to_value(arg2))
+		mod_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
