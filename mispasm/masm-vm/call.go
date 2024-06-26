@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 const (
-	PRINTF byte = iota
+	printf byte = iota
 )
 
 var calls = [1]func([]byte, []byte){}
 
 func init_calls() {
-	calls[PRINTF] = func(arg1 []byte, arg2 []byte) {
+	calls[printf] = func(arg1 []byte, arg2 []byte) {
 		print_stack()
 	}
 }
@@ -19,11 +19,11 @@ func print_stack() {
 	continu := false
 	for _, v := range stack {
 		if !continu {
-			msg = v.Data.(string)
+			msg = v.data.(string)
 			continu = true
 			continue
 		}
-		msg = fmt.Sprintf(msg, v.Data)
+		msg = fmt.Sprintf(msg, v.data)
 	}
 	fmt.Print(msg)
 }

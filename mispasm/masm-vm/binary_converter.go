@@ -2,31 +2,31 @@ package main
 
 func convert_to_value(data []byte) any {
 	switch data[0] {
-	case INT8:
+	case t_int8:
 		return byte_to_int8(data[1])
-	case INT16:
+	case t_int16:
 		return bytes_to_int16(data[1:])
-	case INT32:
+	case t_int32:
 		return bytes_to_int32(data[1:])
-	case INT64:
+	case t_int64:
 		return bytes_to_int64(data[1:])
-	case UINT8:
+	case t_uint8:
 		return byte_to_uint8(data[1])
-	case UINT16:
+	case t_uint16:
 		return bytes_to_uint16(data[1:])
-	case UINT32:
+	case t_uint32:
 		return bytes_to_uint32(data[1:])
-	case UINT64:
+	case t_uint64:
 		return bytes_to_uint64(data[1:])
-	case FLOAT32:
+	case t_float32:
 		return bytes_to_float32(data[1:])
-	case FLOAT64:
+	case t_float64:
 		return bytes_to_float64(data[1:])
-	case BOOL:
+	case t_bool:
 		return byte_to_bool(data[1])
-	case STRING:
+	case t_string:
 		return bytes_to_string(data[1:])
-	case REG:
+	case t_reg:
 		return register_get[data[1]](int(data[2]))
 	}
 	return nil
@@ -35,29 +35,29 @@ func convert_to_value(data []byte) any {
 func convert_to_bytes(t byte, data any) []byte {
 	bytes := []byte{}
 	switch t {
-	case INT8:
+	case t_int8:
 		bytes = []byte{int8_to_byte(data.(int8))}
-	case INT16:
+	case t_int16:
 		bytes = int16_to_bytes(data.(int16))
-	case INT32:
+	case t_int32:
 		bytes = int32_to_bytes(data.(int32))
-	case INT64:
+	case t_int64:
 		bytes = int64_to_bytes(data.(int64))
-	case UINT8:
+	case t_uint8:
 		bytes = []byte{uint8_to_byte(data.(uint8))}
-	case UINT16:
+	case t_uint16:
 		bytes = uint16_to_bytes(data.(uint16))
-	case UINT32:
+	case t_uint32:
 		bytes = uint32_to_bytes(data.(uint32))
-	case UINT64:
+	case t_uint64:
 		bytes = uint64_to_bytes(data.(uint64))
-	case FLOAT32:
+	case t_float32:
 		bytes = float32_to_bytes(data.(float32))
-	case FLOAT64:
+	case t_float64:
 		bytes = float64_to_bytes(data.(float64))
-	case BOOL:
+	case t_bool:
 		bytes = []byte{bool_to_byte(data.(bool))}
-	case STRING:
+	case t_string:
 		bytes = string_to_bytes(data.(string))
 	}
 	return append([]byte{t}, bytes...)

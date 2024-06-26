@@ -1,9 +1,9 @@
 package main
 
 type Stack struct {
-	Name  byte
-	Index int
-	Data  any
+	name  byte
+	index int
+	data  any
 }
 
 var stack = []Stack{}
@@ -14,7 +14,7 @@ func stack_push(reg byte, index int) {
 
 func stack_pop(reg byte, index int) {
 	for i, v := range stack {
-		if v.Name == reg && v.Index == index {
+		if v.name == reg && v.index == index {
 			stack = append(stack[:i], stack[i+1:]...)
 			break
 		}

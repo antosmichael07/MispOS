@@ -1,13 +1,8 @@
 package main
 
-const (
-	GLOBAL byte = iota
-	FUNC
-)
-
 type Function struct {
-	Instructions []byte
-	Labels       []int
+	instructions []byte
+	labels       []int
 }
 
 func get_functions(data []byte) (global string, funcs map[string]Function) {
@@ -34,15 +29,15 @@ func get_functions(data []byte) (global string, funcs map[string]Function) {
 		labels := []int{}
 		for j := 0; j < len(instructions); {
 			_, _, _, _, arg_size := get_args(instructions, j)
-			if instructions[j] == LABEL {
+			if instructions[j] == label {
 				labels = append(labels, j)
 			}
 			j += arg_size + 1
 		}
 
 		funcs[name] = Function{
-			Instructions: instructions,
-			Labels:       labels,
+			instructions: instructions,
+			labels:       labels,
 		}
 	}
 
@@ -50,25 +45,25 @@ func get_functions(data []byte) (global string, funcs map[string]Function) {
 }
 
 func run_function(function Function) {
-	for i := 0; i < len(function.Instructions); i++ {
-		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.Instructions, i)
-		if function.Instructions[i] == LABEL {
+	for i := 0; i < len(function.instructions); i++ {
+		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.instructions, i)
+		if function.instructions[i] == label {
 			continue
 		}
-		if function.Instructions[i] == JMP {
-			i = function.Labels[arg1[1]]
+		if function.instructions[i] == jmp {
+			i = function.labels[arg1[1]]
 			continue
 		}
-		if function.Instructions[i] == JE || function.Instructions[i] == JNE || function.Instructions[i] == JG || function.Instructions[i] == JGE || function.Instructions[i] == JL || function.Instructions[i] == JLE {
+		if function.instructions[i] == je || function.instructions[i] == jne || function.instructions[i] == jg || function.instructions[i] == jge || function.instructions[i] == jl || function.instructions[i] == jle {
 			compare(&function, &i)(arg1, arg2)
 			continue
 		}
 		if is_arg1 && is_arg2 {
-			instructions[function.Instructions[i]](arg1, arg2)
+			instructions[function.instructions[i]](arg1, arg2)
 		} else if is_arg1 {
-			instructions[function.Instructions[i]](arg1, []byte{})
+			instructions[function.instructions[i]](arg1, []byte{})
 		} else {
-			instructions[function.Instructions[i]]([]byte{}, []byte{})
+			instructions[function.instructions[i]]([]byte{}, []byte{})
 		}
 		i += arg_size
 	}
@@ -78,7 +73,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 	offset := 0
 	if arg_sizes[f_instructions[i]] >= 1 {
 		is_arg1 = true
-		if f_instructions[i+1] == STRING {
+		if f_instructions[i+1] == t_string {
 			for j := i + 1; j < len(f_instructions); j++ {
 				if f_instructions[j] == 0 {
 					offset = j + 1
@@ -96,7 +91,7 @@ func get_args(f_instructions []byte, i int) (arg1 []byte, arg2 []byte, is_arg1 b
 
 	if arg_sizes[f_instructions[i]] >= 2 {
 		is_arg2 = true
-		if f_instructions[offset] == STRING {
+		if f_instructions[offset] == t_string {
 			for j := offset; j < len(f_instructions); j++ {
 				if f_instructions[j] == 0 {
 					arg_size = j - i
