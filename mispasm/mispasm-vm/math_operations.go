@@ -553,3 +553,131 @@ var mod_math_operation = [13]func([]byte, []byte){
 		mod_math_operation_reg[arg1[1]%11](convert_to_value(arg1), convert_to_value(arg2))
 	},
 }
+
+var inc_math_operation = [21]func(){
+	func() {
+		register_bi[0]++
+	},
+	func() {
+		register_si[0]++
+	},
+	func() {
+		register_li[0]++
+	},
+	func() {
+		register_lli[0]++
+	},
+	func() {
+		register_bui[0]++
+	},
+	func() {
+		register_sui[0]++
+	},
+	func() {
+		register_lui[0]++
+	},
+	func() {
+		register_llui[0]++
+	},
+	func() {
+		register_lf[0]++
+	},
+	func() {
+		register_llf[0]++
+	},
+	func() {},
+	func() {
+		register_rbi[0]++
+	},
+	func() {
+		register_rsi[0]++
+	},
+	func() {
+		register_rli[0]++
+	},
+	func() {
+		register_rlli[0]++
+	},
+	func() {
+		register_rbui[0]++
+	},
+	func() {
+		register_rsui[0]++
+	},
+	func() {
+		register_rlui[0]++
+	},
+	func() {
+		register_rllui[0]++
+	},
+	func() {
+		register_rlf[0]++
+	},
+	func() {
+		register_rllf[0]++
+	},
+}
+
+var dec_math_operation = [21]func(){
+	func() {
+		register_bi[0]--
+	},
+	func() {
+		register_si[0]--
+	},
+	func() {
+		register_li[0]--
+	},
+	func() {
+		register_lli[0]--
+	},
+	func() {
+		register_bui[0]--
+	},
+	func() {
+		register_sui[0]--
+	},
+	func() {
+		register_lui[0]--
+	},
+	func() {
+		register_llui[0]--
+	},
+	func() {
+		register_lf[0]--
+	},
+	func() {
+		register_llf[0]--
+	},
+	func() {},
+	func() {
+		register_rbi[0]--
+	},
+	func() {
+		register_rsi[0]--
+	},
+	func() {
+		register_rli[0]--
+	},
+	func() {
+		register_rlli[0]--
+	},
+	func() {
+		register_rbui[0]--
+	},
+	func() {
+		register_rsui[0]--
+	},
+	func() {
+		register_rlui[0]--
+	},
+	func() {
+		register_rllui[0]--
+	},
+	func() {
+		register_rlf[0]--
+	},
+	func() {
+		register_rllf[0]--
+	},
+}

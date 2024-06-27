@@ -20,11 +20,13 @@ const (
 	jge
 	jl
 	jle
+	inc
+	dec
 )
 
-var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2}
+var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1}
 
-var instructions = [19]func([]byte, []byte){}
+var instructions = [21]func([]byte, []byte){}
 
 func init_instructions(funcs *map[string]Function) {
 	instructions[add] = func(arg1 []byte, arg2 []byte) {
@@ -60,5 +62,11 @@ func init_instructions(funcs *map[string]Function) {
 	instructions[cmp] = func(arg1 []byte, arg2 []byte) {
 		register_cmp[0] = arg1
 		register_cmp[1] = arg2
+	}
+	instructions[inc] = func(arg1 []byte, arg2 []byte) {
+		inc_math_operation[arg1[1]]()
+	}
+	instructions[dec] = func(arg1 []byte, arg2 []byte) {
+		dec_math_operation[arg1[1]]()
 	}
 }
