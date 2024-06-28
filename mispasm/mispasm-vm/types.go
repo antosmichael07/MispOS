@@ -11,9 +11,8 @@ const (
 	t_uint64
 	t_float32
 	t_float64
-	t_bool
 	t_string
 	t_reg
 )
 
-var type_sizes = []byte{1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 1, 0, 2}
+var type_sizes = []byte{1, 2, 4, 8, 1, 2, 4, 8, 4, 8, 0, 2}

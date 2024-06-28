@@ -46,10 +46,13 @@ func get_functions(data []byte) (global string, funcs map[string]Function) {
 
 func run_function(function Function) {
 	for i := 0; i < len(function.instructions); i++ {
-		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.instructions, i)
+		if should_close {
+			return
+		}
 		if function.instructions[i] == label {
 			continue
 		}
+		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.instructions, i)
 		if function.instructions[i] == jmp {
 			i = function.labels[arg1[1]]
 			continue
@@ -57,6 +60,9 @@ func run_function(function Function) {
 		if function.instructions[i] == je || function.instructions[i] == jne || function.instructions[i] == jg || function.instructions[i] == jge || function.instructions[i] == jl || function.instructions[i] == jle {
 			compare(&function, &i)(arg1, arg2)
 			continue
+		}
+		if function.instructions[i] == ret {
+			return
 		}
 		if is_arg1 && is_arg2 {
 			instructions[function.instructions[i]](arg1, arg2)

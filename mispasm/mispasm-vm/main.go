@@ -5,6 +5,8 @@ import (
 	"os"
 )
 
+var should_close = false
+
 func main() {
 	data := read_exec(os.Args[1])
 	global, funcs := get_functions(data)

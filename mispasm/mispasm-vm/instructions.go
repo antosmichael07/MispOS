@@ -22,11 +22,13 @@ const (
 	jle
 	inc
 	dec
+	ret
+	def
 )
 
-var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1}
+var arg_sizes = []byte{2, 2, 1, 2, 2, 1, 1, 1, 2, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0}
 
-var instructions = [21]func([]byte, []byte){}
+var instructions = [23]func([]byte, []byte){}
 
 func init_instructions(funcs *map[string]Function) {
 	instructions[add] = func(arg1 []byte, arg2 []byte) {
@@ -54,7 +56,7 @@ func init_instructions(funcs *map[string]Function) {
 		stack_pop(arg1[1], int(arg1[2]))
 	}
 	instructions[mov] = func(arg1 []byte, arg2 []byte) {
-		register_set[arg1[1]](arg1[2], convert_to_value(arg2))
+		register_set[arg1[1]](arg1[2], convert_to_value[arg2[0]](arg2))
 	}
 	instructions[mod] = func(arg1 []byte, arg2 []byte) {
 		mod_math_operation[arg1[0]](arg1, arg2)
@@ -68,5 +70,8 @@ func init_instructions(funcs *map[string]Function) {
 	}
 	instructions[dec] = func(arg1 []byte, arg2 []byte) {
 		dec_math_operation[arg1[1]]()
+	}
+	instructions[def] = func(arg1 []byte, arg2 []byte) {
+		should_close = true
 	}
 }
