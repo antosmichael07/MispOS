@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const (
 	printf byte = iota
@@ -10,11 +12,11 @@ var calls = [1]func([]byte, []byte){}
 
 func init_calls() {
 	calls[printf] = func(arg1 []byte, arg2 []byte) {
-		print_stack()
+		fmt.Print(sprintf_stack())
 	}
 }
 
-func print_stack() {
+func sprintf_stack() string {
 	msg := ""
 	continu := false
 	for _, v := range stack {
@@ -25,5 +27,5 @@ func print_stack() {
 		}
 		msg = fmt.Sprintf(msg, v.data)
 	}
-	fmt.Print(msg)
+	return msg
 }
