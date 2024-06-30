@@ -2,43 +2,43 @@ package main
 
 var register_cmp = [2][]byte{}
 
-var compare = [6]func(function *Function, index *int, arg1 []byte, arg2 []byte){
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+var compare = [6]func(arg1 []byte, arg2 []byte, function *Function, index *int){
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if convert_to_value[register_cmp[0][0]](register_cmp[0]) == convert_to_value[register_cmp[1][0]](register_cmp[1]) {
 			*index = function.labels[arg1[1]]
 		} else {
 			*index = function.labels[arg2[1]]
 		}
 	},
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if convert_to_value[register_cmp[0][0]](register_cmp[0]) != convert_to_value[register_cmp[1][0]](register_cmp[1]) {
 			*index = function.labels[arg1[1]]
 		} else {
 			*index = function.labels[arg2[1]]
 		}
 	},
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if register_cmp[0][0] != t_reg {
 			compare_jg[register_cmp[0][0]](function, index, arg1, arg2)
 		} else {
 			compare_jg[register_cmp[0][1]%11](function, index, arg1, arg2)
 		}
 	},
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if register_cmp[0][0] != t_reg {
 			compare_jge[register_cmp[0][0]](function, index, arg1, arg2)
 		} else {
 			compare_jge[register_cmp[0][1]%11](function, index, arg1, arg2)
 		}
 	},
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if register_cmp[0][0] != t_reg {
 			compare_jl[register_cmp[0][0]](function, index, arg1, arg2)
 		} else {
 			compare_jl[register_cmp[0][1]%11](function, index, arg1, arg2)
 		}
 	},
-	func(function *Function, index *int, arg1 []byte, arg2 []byte) {
+	func(arg1 []byte, arg2 []byte, function *Function, index *int) {
 		if register_cmp[0][0] != t_reg {
 			compare_jle[register_cmp[0][0]](function, index, arg1, arg2)
 		} else {

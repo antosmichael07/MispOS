@@ -49,27 +49,16 @@ func run_function(function Function) {
 		if should_close {
 			return
 		}
-		if function.instructions[i] == label {
-			continue
-		}
-		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.instructions, i)
-		if function.instructions[i] == jmp {
-			i = function.labels[arg1[1]]
-			continue
-		}
-		if function.instructions[i] == je || function.instructions[i] == jne || function.instructions[i] == jg || function.instructions[i] == jge || function.instructions[i] == jl || function.instructions[i] == jle {
-			compare[function.instructions[i]-13](&function, &i, arg1, arg2)
-			continue
-		}
 		if function.instructions[i] == ret {
 			return
 		}
+		arg1, arg2, is_arg1, is_arg2, arg_size := get_args(function.instructions, i)
 		if is_arg1 && is_arg2 {
-			instructions[function.instructions[i]](arg1, arg2)
+			instructions[function.instructions[i]](arg1, arg2, &function, &i, &arg_size)
 		} else if is_arg1 {
-			instructions[function.instructions[i]](arg1, []byte{})
+			instructions[function.instructions[i]](arg1, []byte{}, &function, &i, &arg_size)
 		} else {
-			instructions[function.instructions[i]]([]byte{}, []byte{})
+			instructions[function.instructions[i]]([]byte{}, []byte{}, &Function{}, &i, &arg_size)
 		}
 		i += arg_size
 	}
