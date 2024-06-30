@@ -58,7 +58,7 @@ func run_function(function Function) {
 			continue
 		}
 		if function.instructions[i] == je || function.instructions[i] == jne || function.instructions[i] == jg || function.instructions[i] == jge || function.instructions[i] == jl || function.instructions[i] == jle {
-			compare(&function, &i)(arg1, arg2)
+			compare[function.instructions[i]-13](&function, &i, arg1, arg2)
 			continue
 		}
 		if function.instructions[i] == ret {
