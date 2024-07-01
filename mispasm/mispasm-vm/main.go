@@ -19,7 +19,7 @@ func main() {
 func read_exec(loc string) (data []byte) {
 	data, err := os.ReadFile(loc)
 	if err != nil {
-		fmt.Printf("Error reading executable\n")
+		fmt.Printf("Error reading executable file\n")
 		panic(err)
 	}
 	return data
